@@ -64,7 +64,7 @@ function App() {
           weight = {pokemon.weight}
           height = {pokemon.height}
           number = {pokemon.id}
-          img = {pokemon.sprites.front_default}
+          img = {""}
         />
             )
           })
