@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react"
-
 
 function Pokemon({name, type, weight, number, img, height}) {
 

@@ -5,43 +5,46 @@ function App() {
 
   
   const [pokemonArray, setPokemonArray] = useState([])
-  const [pokemon, setPokemon] = useState([])
 
+  let url = "https://pokeapi.co/api/v2/pokemon/"
 
-  let url = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
+  const createID = () => {
 
+    const date = Date.now().toString(32)
+    const random = Math.random().toString(32).substring(2)
+
+    return date+random
+
+  }
   const createType = (typeArray) => {
 
-    if(typeArray.lenght > 1){
-      return `${typeArray[0].type.name}/${typeArray[1].type.name}`
+    if(typeArray.lenght < 2){
+      return  `${typeArray[0].type.name}/${typeArray[1].type.name}`
     }
     else {
-      return `${typeArray[0].type.name}`
+      return  `${typeArray[0].type.name}`
     }
-
   }
   
   
   useEffect(() => {
-    const getPokemonArray = async () => {
 
-        const response = await fetch(url)
-        const result = await response.json()
-        setPokemonArray([...pokemonArray, ...result.results])
-        pokemonArray.forEach( async (pokemon) => {
-          const response2 = await fetch(pokemon.url)
-          const result2 = await response2.json()
-          setPokemon([...pokemon, result2])
-        })
+    const getPokemonArray = async () => {
+        let pokemon = []
+        for(let i = 1; i < 898; i++){
+          const response = await fetch(url+i)
+          const result = await response.json();
+          pokemon = [...pokemon, result]
+          
+        }
+        setPokemonArray([...pokemon])
     }
-    getPokemonArray();
+    getPokemonArray()
+
   },[])
 
 
-  
-  
-  console.log(pokemon)
-  
+  console.log(pokemonArray)
   return (
     <div className="container mt-20 mx-auto">
       
@@ -55,13 +58,13 @@ function App() {
 
             return (
               <Pokemon 
-          key = {pokemon.url}
+          key = {createID()}
           name = {pokemon.name}
-          type = {""}
-          weight = {""}
-          height = {""}
-          number = {""}
-          img = {""}
+          type = {createType(pokemon.types)}
+          weight = {pokemon.weight}
+          height = {pokemon.height}
+          number = {pokemon.id}
+          img = {pokemon.sprites.front_default}
         />
             )
           })
