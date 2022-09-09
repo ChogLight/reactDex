@@ -8,6 +8,14 @@ function App() {
   const [pokemonArray, setPokemonArray] = useState([])
 
   let url = "https://pokeapi.co/api/v2/pokemon/"
+  let urls = []
+
+  for(let i = 1; i < 500 ; i++){
+
+    urls = [...urls, url + i]
+
+  }
+
 
   const createID = () => {
 
@@ -29,36 +37,20 @@ function App() {
   
   
   useEffect(() => {
-
-    const getPokemonArray = async () => {
-        let pokemon = []
-        for(let i = 1; i < 22; i++){
-          const response = await fetch(url+i)
-          const result = await response.json();
-          pokemon = [...pokemon, result]
-          
-        }
-        setPokemonArray([...pokemon])
-    }
-    getPokemonArray()
-
+    let pokeArray = []
+    Promise.all(urls.map(url => {
+      fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        pokeArray.push(response)
+        pokeArray.sort((a,b) => {
+          return a.id  - b.id
+        })
+        setPokemonArray([...pokeArray])
+      })
+    }))
   },[])
 
-
-  // const loadMore = () => {
-  //   const getPokemonArray = async () => {
-  //     let pokemon = []
-  //     for(let i = pokemonArray.length; i < pokemonArray.length+20; i++){
-  //       const response = await fetch(url+i)
-  //       const result = await response.json();
-  //       pokemon = [...pokemon, result]
-        
-  //     }
-  //     setPokemonArray([...pokemon])
-  // }
-  // getPokemonArray()
-  // }
-  console.log(pokemonArray)
   return (
     <div className="container mt-20 mx-auto">
       
@@ -67,7 +59,6 @@ function App() {
       <div className="md:grid grid-cols-3 gap-4 mt-20">
 
         {
-          
           pokemonArray.map((pokemon) => {
 
             return (
@@ -86,8 +77,8 @@ function App() {
 
       </div>
 
-      <LoadMore onClick = {""}/>
-      <div>""</div>
+      <LoadMore/>
+      <div>{" "}</div>
     </div>
   )
 }
