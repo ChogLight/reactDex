@@ -1,6 +1,7 @@
 import Header from "./Components/Header"
 import Pokemon from "./Components/Pokemon"
 import { useEffect, useState } from 'react'
+import LoadMore from "./Components/LoadMore"
 function App() {
 
   
@@ -31,7 +32,7 @@ function App() {
 
     const getPokemonArray = async () => {
         let pokemon = []
-        for(let i = 1; i < 898; i++){
+        for(let i = 1; i < 22; i++){
           const response = await fetch(url+i)
           const result = await response.json();
           pokemon = [...pokemon, result]
@@ -44,6 +45,19 @@ function App() {
   },[])
 
 
+  // const loadMore = () => {
+  //   const getPokemonArray = async () => {
+  //     let pokemon = []
+  //     for(let i = pokemonArray.length; i < pokemonArray.length+20; i++){
+  //       const response = await fetch(url+i)
+  //       const result = await response.json();
+  //       pokemon = [...pokemon, result]
+        
+  //     }
+  //     setPokemonArray([...pokemon])
+  // }
+  // getPokemonArray()
+  // }
   console.log(pokemonArray)
   return (
     <div className="container mt-20 mx-auto">
@@ -64,14 +78,16 @@ function App() {
           weight = {pokemon.weight}
           height = {pokemon.height}
           number = {pokemon.id}
-          img = {""}
+          img = {pokemon.sprites.front_default}
         />
             )
           })
         }
 
       </div>
-      
+
+      <LoadMore onClick = {""}/>
+      <div>""</div>
     </div>
   )
 }
