@@ -6,11 +6,11 @@ function App() {
 
   
   const [pokemonArray, setPokemonArray] = useState([])
-  const [counter, setCounter] = useState(700)
+  const [counter, setCounter] = useState()
 
   let url = "https://pokeapi.co/api/v2/pokemon/"
   let urls = []
-  for(let i = 1; i < counter; i++){
+  for(let i = 1; i < 905; i++){
 
     urls = [...urls, url + i]
 
@@ -51,8 +51,7 @@ function App() {
 
         {
 
-          
-          pokemonArray.filter(pokemon => pokemon.id < counter).map((pokemon) => {
+          pokemonArray.map((pokemon) => {
 
             return (
               <Pokemon 
