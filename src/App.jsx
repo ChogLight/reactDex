@@ -1,15 +1,19 @@
 import Header from "./Components/Header"
 import Pokemon from "./Components/Pokemon"
 import { useEffect, useState } from 'react'
-import LoadMore from "./Components/LoadMore"
+import Pagination from "./Components/Pagination"
 function App() {
 
   
   const [pokemonArray, setPokemonArray] = useState([])
-  const [counter, setCounter] = useState()
+  const [upperCounter, setUpperCounter] = useState(22)
+  const [lowerCounter, setLowerCounter] = useState(1)
 
   let url = "https://pokeapi.co/api/v2/pokemon/"
   let urls = []
+
+
+
   for(let i = 1; i < 899; i++){
 
     urls = [...urls, url + i]
@@ -27,6 +31,7 @@ function App() {
   } 
 
   useEffect(() => {
+
     let pokeArray = []
     Promise.all(urls.map(url => {
       fetch(url)
@@ -53,24 +58,29 @@ function App() {
 
           pokemonArray.map((pokemon) => {
 
-            return (
-              <Pokemon 
-          key = {createID()}
-          name = {pokemon.name}
-          weight = {pokemon.weight}
-          height = {pokemon.height}
-          number = {pokemon.id}
-          type = {pokemon.types[1]  ? `${pokemon.types[0].type.name}/${pokemon.types[1].type.name}` : pokemon.types[0].type.name}
-          img = {pokemon.sprites.front_default}
-        />
-            )
+            if(pokemon.id < upperCounter && pokemon.id >= lowerCounter){
+              return (
+                <Pokemon
+            key = {createID()}
+            name = {pokemon.name}
+            weight = {pokemon.weight}
+            height = {pokemon.height}
+            number = {pokemon.id}
+            type = {pokemon.types[1]  ? `${pokemon.types[0].type.name}/${pokemon.types[1].type.name}` : pokemon.types[0].type.name}
+            img = {pokemon.sprites.front_default}
+          />
+              )
+            }
+            
           })
         }
 
       </div>
 
-      <LoadMore onClick={()=>setCounter(counter + 20)}/>
-      <div>{" "}</div>
+      <Pagination 
+        setUpperCounter = {setUpperCounter} 
+        setLowerCounter = {setLowerCounter}
+        />
     </div>
   )
 }
