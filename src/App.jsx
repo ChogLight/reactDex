@@ -14,7 +14,7 @@ function App() {
 
 
 
-  for(let i = 1; i < 899; i++){
+  for(let i = 1; i < 500; i++){
 
     urls = [...urls, url + i]
 
@@ -58,7 +58,7 @@ function App() {
 
           pokemonArray.map((pokemon) => {
 
-            if(pokemon.id < upperCounter && pokemon.id >= lowerCounter){
+            if(pokemon.id < upperCounter && pokemon.id >=lowerCounter){
               return (
                 <Pokemon
             key = {createID()}

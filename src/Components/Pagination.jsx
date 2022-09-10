@@ -34,7 +34,7 @@ function Pagination({setUpperCounter, setLowerCounter, pokemonNumber}) {
                     return(
                         <button 
                             key = {`page ${i}`}
-                            onClick = {()=> {setUpperCounter((page-1)*22+22); setLowerCounter((page-1)*22+1)}}
+                            onClick = {()=> {setUpperCounter((page-1)*21+22); setLowerCounter((page-1)*21+1)}}
                             className=" hover:text-yellow-300 md:{text-sm w-10 h-10} md:mx-4 
                                         text-xs w-8 h-8 mx-2 rounded-full bg-red-500 p-2">
                             {page}
