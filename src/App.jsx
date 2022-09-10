@@ -10,7 +10,7 @@ function App() {
 
   let url = "https://pokeapi.co/api/v2/pokemon/"
   let urls = []
-  for(let i = 1; i < 905; i++){
+  for(let i = 1; i < 899; i++){
 
     urls = [...urls, url + i]
 
