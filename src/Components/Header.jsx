@@ -2,7 +2,7 @@
 
 function Header() {
   return (
-    <h1 className="font-black mx-auto text-5xl text-center md:w-2/3">
+    <h1 id = "header" className="font-black mx-auto text-5xl text-center md:w-2/3">
         Welcome to the {''}
         
         <span className="text-red-600">
