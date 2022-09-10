@@ -80,6 +80,7 @@ function App() {
       <Pagination 
         setUpperCounter = {setUpperCounter} 
         setLowerCounter = {setLowerCounter}
+        pokemonNumber = {pokemonArray.length}
         />
     </div>
   )

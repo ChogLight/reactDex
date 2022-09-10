@@ -1,6 +1,6 @@
 
 import { useState } from 'react'
-function Pagination({setUpperCounter, setLowerCounter}) {
+function Pagination({setUpperCounter, setLowerCounter, pokemonNumber}) {
 
     const [pageNumber, setPageNumber] = useState(11)
     let pages = []
@@ -16,13 +16,13 @@ function Pagination({setUpperCounter, setLowerCounter}) {
     }
 
     return (
-    <div className="flex md:w-1/2 mx-auto my-5 bg-white text-center p-6 font-bold text-white rounded-full">
-
+    <div className="grid md:grid-cols-12 grid-cols-6 md:w-2/3 w-11/12 mx-auto my-5 bg-white text-center p-5 font-bold text-white rounded-full">
         {
             (pages.includes(1)) ? 
                 "": 
                 <button onClick={changePageBkw} 
-                    className=" bg-white  hover:text-yellow-300 md:{text-sm w-10 h-10} text-red-500 p-2"> 
+                    className=" hover:text-yellow-300 text-red-500 md:{text-sm w-10 h-10 mx-4} 
+                    text-xs w-8 h-8 mx-2 rounded-full bg-white p-2"> 
                     {"<"} 
                     </button>
         }
@@ -30,13 +30,13 @@ function Pagination({setUpperCounter, setLowerCounter}) {
         {
             pages.map((page,i) => {
 
-                if(page < 44){
+                if(page < Math.trunc(pokemonNumber/21)){
                     return(
                         <button 
                             key = {`page ${i}`}
                             onClick = {()=> {setUpperCounter((page-1)*22+22); setLowerCounter((page-1)*22+1)}}
-                            className=" hover:text-yellow-300 md:{text-sm w-10 h-10} 
-                                        text-xs w-8 h-8 mx-2 md:mx-4 rounded-full bg-red-500 p-2">
+                            className=" hover:text-yellow-300 md:{text-sm w-10 h-10} md:mx-4 
+                                        text-xs w-8 h-8 mx-2 rounded-full bg-red-500 p-2">
                             {page}
                         </button>                                                          
                     )   
@@ -48,10 +48,11 @@ function Pagination({setUpperCounter, setLowerCounter}) {
             })
         }
         {
-            (pages.includes(43)) ? 
+            (pages.includes(Math.trunc(pokemonNumber/21))) ? 
                 "": 
                 <button onClick={changePageFrw} 
-                    className=" bg-white hover:text-yellow-300 md:{text-sm w-10 h-10} text-red-500 p-2"> 
+                    className=" hover:text-yellow-300 text-red-500 md:{text-sm w-10 h-10 mx-4} 
+                    text-xs w-8 h-8 mx-2 rounded-full bg-white p-2"> 
                     {">"} 
                     </button>  
         }
