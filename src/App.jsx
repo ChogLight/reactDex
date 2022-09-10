@@ -6,11 +6,11 @@ function App() {
 
   
   const [pokemonArray, setPokemonArray] = useState([])
+  const [counter, setCounter] = useState(700)
 
   let url = "https://pokeapi.co/api/v2/pokemon/"
   let urls = []
-
-  for(let i = 1; i < 500 ; i++){
+  for(let i = 1; i < counter; i++){
 
     urls = [...urls, url + i]
 
@@ -24,18 +24,8 @@ function App() {
 
     return date+random
 
-  }
-  const createType = (typeArray) => {
+  } 
 
-    if(typeArray.lenght < 2){
-      return  `${typeArray[0].type.name}/${typeArray[1].type.name}`
-    }
-    else {
-      return  `${typeArray[0].type.name}`
-    }
-  }
-  
-  
   useEffect(() => {
     let pokeArray = []
     Promise.all(urls.map(url => {
@@ -46,10 +36,11 @@ function App() {
         pokeArray.sort((a,b) => {
           return a.id  - b.id
         })
-        setPokemonArray([...pokeArray])
+        setPokemonArray([...pokemonArray,...pokeArray])
       })
     }))
   },[])
+
 
   return (
     <div className="container mt-20 mx-auto">
@@ -59,16 +50,18 @@ function App() {
       <div className="md:grid grid-cols-3 gap-4 mt-20">
 
         {
-          pokemonArray.map((pokemon) => {
+
+          
+          pokemonArray.filter(pokemon => pokemon.id < counter).map((pokemon) => {
 
             return (
               <Pokemon 
           key = {createID()}
           name = {pokemon.name}
-          type = {createType(pokemon.types)}
           weight = {pokemon.weight}
           height = {pokemon.height}
           number = {pokemon.id}
+          type = {pokemon.types[1]  ? `${pokemon.types[0].type.name}/${pokemon.types[1].type.name}` : pokemon.types[0].type.name}
           img = {pokemon.sprites.front_default}
         />
             )
@@ -77,7 +70,7 @@ function App() {
 
       </div>
 
-      <LoadMore/>
+      <LoadMore onClick={()=>setCounter(counter + 20)}/>
       <div>{" "}</div>
     </div>
   )

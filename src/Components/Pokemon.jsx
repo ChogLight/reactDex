@@ -1,10 +1,9 @@
 
 function Pokemon({name, type, weight, number, img, height}) {
 
-    
 
   return (
-    <div className="bg-white rounded-md mx-5 my-3 flex p-3 hover:scale-105 duration-500">
+    <div className="bg-white rounded-md mx-5 my-3 flex p-3 hover:scale-105 duration-500 shadow-lg">
         
         <div className="w-1/3 font-bold text-red-600 text-xs">
             <p>
