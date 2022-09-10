@@ -19,7 +19,7 @@ function Pagination({setUpperCounter, setLowerCounter, pokemonNumber}) {
     <div className="grid md:grid-cols-12 grid-cols-6 md:w-2/3 w-11/12 mx-auto my-5 bg-white text-center p-5 font-bold text-white rounded-full">
         {
             (pages.includes(1)) ? 
-                "": 
+            <p></p>: 
                 <button onClick={changePageBkw} 
                     className=" hover:text-yellow-300 text-red-500 md:{text-sm w-10 h-10 mx-4} 
                     text-xs w-8 h-8 mx-2 rounded-full bg-white p-2"> 
@@ -49,7 +49,7 @@ function Pagination({setUpperCounter, setLowerCounter, pokemonNumber}) {
         }
         {
             (pages.includes(Math.trunc(pokemonNumber/21))) ? 
-                "": 
+                <p></p>: 
                 <button onClick={changePageFrw} 
                     className=" hover:text-yellow-300 text-red-500 md:{text-sm w-10 h-10 mx-4} 
                     text-xs w-8 h-8 mx-2 rounded-full bg-white p-2"> 
