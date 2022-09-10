@@ -30,7 +30,7 @@ function Pagination({setUpperCounter, setLowerCounter, pokemonNumber}) {
         {
             pages.map((page,i) => {
 
-                if(page < Math.trunc(pokemonNumber/21)){
+                if(page <= Math.trunc(pokemonNumber/21)){
                     return(
                         <button 
                             key = {`page ${i}`}
