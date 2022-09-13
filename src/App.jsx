@@ -1,5 +1,6 @@
 import Header from "./Components/Header"
 import Pokemon from "./Components/Pokemon"
+import Card from "./Components/Card"
 import { useEffect, useState } from 'react'
 import Pagination from "./Components/Pagination"
 function App() {
@@ -8,13 +9,15 @@ function App() {
   const [pokemonArray, setPokemonArray] = useState([])
   const [upperCounter, setUpperCounter] = useState(22)
   const [lowerCounter, setLowerCounter] = useState(1)
+  const [card, setCard] = useState(false)
+  const [pokemon, setPokemon] = useState({})
 
   let url = "https://pokeapi.co/api/v2/pokemon/"
   let urls = []
 
 
 
-  for(let i = 1; i < 899; i++){
+  for(let i = 1; i < 500; i++){
 
     urls = [...urls, url + i]
 
@@ -51,7 +54,15 @@ function App() {
     <div className="container mt-20 mx-auto">
       
       <Header/>
-
+      
+      {
+        card ? <Card 
+                setCard={setCard}
+                pokemon = {pokemon}
+                /> :
+        ""
+      }
+      
       <div className="md:grid grid-cols-3 gap-4 mt-20">
 
         {
@@ -68,6 +79,9 @@ function App() {
             number = {pokemon.id}
             type = {pokemon.types[1]  ? `${pokemon.types[0].type.name}/${pokemon.types[1].type.name}` : pokemon.types[0].type.name}
             img = {pokemon.sprites.front_default}
+            pokemon = {pokemon}
+            setCard = {setCard}
+            setPokemon = {setPokemon}
           />
               )
             }
