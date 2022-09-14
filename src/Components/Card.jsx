@@ -51,15 +51,34 @@ function Card({setCard, pokemon}) {
                             </span>
 
                         </p>
+                        <p className="font-bold mb-3 text-gray-700 uppercase">
+                            Abilities: {''}
+                            <span className="font-normal capitalize">    
+                                {
+                                    pokemon.abilities.map((ability)=>{
+                                        console.log(ability)
+                                    })        
+                                }
+                                   
+                            </span>
+                        </p>
+                        
+                        {/* <p className="font-bold mb-3 text-gray-700 uppercase">
+                            Weight: {''}
+                            <span className="font-normal normal-case">
+                            {`${pokemon.weight/10}Kg`}
+                            </span>
+
+                        </p> */}
 
                     </div>
                     
                 </div>
                 <button 
-                            type = "button" 
-                            className="px-3 py-2 bg-red-500 m-5 text-white text-sm font-bold rounded-md"
-                            onClick={()=>setCard(false)}>
-                            Close
+                    type = "button" 
+                    className="px-3 py-2 bg-red-500 m-5 text-white text-sm font-bold rounded-md"
+                    onClick={()=>setCard(false)}>
+                    Close
                 </button>
             </div>
             </div>
