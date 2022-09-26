@@ -10,7 +10,7 @@ function Pokemon({name, type, weight, number, img, height, setCard, setPokemon, 
             <p>
                 N.°{number}
             </p>
-            <img className="w-[192px]"src={img} alt = {`${pokemon.name}_img`}/>
+            <img width = "184" height="184" src={img} alt = {`${pokemon.name}_img`}/>
         </div>
         <div className="w-2/3">
 
