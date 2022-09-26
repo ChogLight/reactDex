@@ -6,11 +6,11 @@ function Pokemon({name, type, weight, number, img, height, setCard, setPokemon, 
     <div className="bg-white rounded-md mx-5 my-3 flex p-3 hover:scale-105 duration-500 shadow-lg cursor-pointer"
         onClick = {(e) => {setCard(true); setPokemon(pokemon)}}>
         
-        <div className="w-1/3 font-bold text-red-600 text-xs">
+        <div className="w-1/3 font-bold text-red-600 text-xs mr-5">
             <p>
                 N.°{number}
             </p>
-            <img src={img}/>
+            <img className="w-[192px]"src={img} alt = {`${pokemon.name}_img`}/>
         </div>
         <div className="w-2/3">
 
