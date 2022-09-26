@@ -11,6 +11,7 @@ function App() {
   const [counter, setCounter] = useState(0)
   const [card, setCard] = useState(false)
   const [pokemon, setPokemon] = useState({})
+  const [pokemonNumber, setPokemonNumber] = useState(0)
 
   let url = `https://pokeapi.co/api/v2/pokemon?limit=21&offset=${counter}`
 
@@ -22,6 +23,7 @@ function App() {
       const response = await fetch(url)
       const result = await response.json()
       setUrlArray([...result.results])
+      setPokemonNumber(result.count)
     }
     getUrl()
 
@@ -51,6 +53,7 @@ function App() {
     return date+random
 
   } 
+  console.log(urlArray)
   return (
     <div className="container mt-20 mx-auto">
       
@@ -90,6 +93,7 @@ function App() {
 
       <Pagination 
         setCounter = {setCounter} 
+        pokemonNumber = {pokemonNumber}
         />
     </div>
   )
