@@ -7,22 +7,41 @@ function App() {
 
   
   const [pokemonArray, setPokemonArray] = useState([])
-  const [upperCounter, setUpperCounter] = useState(22)
-  const [lowerCounter, setLowerCounter] = useState(1)
+  const [urlArray, setUrlArray] = useState([])
+  const [counter, setCounter] = useState(0)
   const [card, setCard] = useState(false)
   const [pokemon, setPokemon] = useState({})
 
-  let url = "https://pokeapi.co/api/v2/pokemon/"
-  let urls = []
+  let url = `https://pokeapi.co/api/v2/pokemon?limit=21&offset=${counter}`
 
 
 
-  for(let i = 1; i < 899; i++){
+  useEffect(() => {
 
-    urls = [...urls, url + i]
+    const getUrl = async () => {
+      const response = await fetch(url)
+      const result = await response.json()
+      setUrlArray([...result.results])
+    }
+    getUrl()
 
-  }
+  },[counter])
 
+  useEffect(() => {
+
+    let pokeArray = []
+    Promise.all(urlArray.map(url => {
+      fetch(url.url)
+      .then(response => response.json())
+      .then(response => {
+        pokeArray.push(response)
+        pokeArray.sort((a,b) => {
+          return a.id  - b.id
+        })
+        setPokemonArray([...pokeArray])
+      })
+    }))
+  },[urlArray])
 
   const createID = () => {
 
@@ -32,24 +51,6 @@ function App() {
     return date+random
 
   } 
-
-  useEffect(() => {
-
-    let pokeArray = []
-    Promise.all(urls.map(url => {
-      fetch(url)
-      .then(response => response.json())
-      .then(response => {
-        pokeArray.push(response)
-        pokeArray.sort((a,b) => {
-          return a.id  - b.id
-        })
-        setPokemonArray([...pokemonArray,...pokeArray])
-      })
-    }))
-  },[])
-
-
   return (
     <div className="container mt-20 mx-auto">
       
@@ -68,33 +69,27 @@ function App() {
         {
 
           pokemonArray.map((pokemon) => {
-
-            if(pokemon.id < upperCounter && pokemon.id >=lowerCounter){
               return (
                 <Pokemon
-            key = {createID()}
-            name = {pokemon.name}
-            weight = {pokemon.weight}
-            height = {pokemon.height}
-            number = {pokemon.id}
-            type = {pokemon.types[1]  ? `${pokemon.types[0].type.name}/${pokemon.types[1].type.name}` : pokemon.types[0].type.name}
-            img = {pokemon.sprites.front_default}
-            pokemon = {pokemon}
-            setCard = {setCard}
-            setPokemon = {setPokemon}
-          />
+                    key = {createID()}
+                    name = {pokemon.name}
+                    weight = {pokemon.weight}
+                    height = {pokemon.height}
+                    number = {pokemon.id}
+                    type = {pokemon.types[1]  ? `${pokemon.types[0].type.name}/${pokemon.types[1].type.name}` : pokemon.types[0].type.name}
+                    img = {pokemon.sprites.front_default}
+                    pokemon = {pokemon}
+                    setCard = {setCard}
+                    setPokemon = {setPokemon}
+                  />
               )
-            }
-            
           })
         }
 
       </div>
 
       <Pagination 
-        setUpperCounter = {setUpperCounter} 
-        setLowerCounter = {setLowerCounter}
-        pokemonNumber = {pokemonArray.length}
+        setCounter = {setCounter} 
         />
     </div>
   )

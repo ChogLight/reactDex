@@ -56,7 +56,8 @@ function Card({setCard, pokemon}) {
                             <span className="font-normal capitalize">    
                                 {
                                     pokemon.abilities.map((ability)=>{
-                                        console.log(ability)
+                                        let {name, url} = ability
+                                        console.log(name)
                                     })        
                                 }
                                    

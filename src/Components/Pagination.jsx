@@ -1,6 +1,7 @@
 
 import { useState } from 'react'
-function Pagination({setUpperCounter, setLowerCounter, pokemonNumber}) {
+function Pagination({setCounter}) {
+
 
     const [pageNumber, setPageNumber] = useState(11)
     let pages = []
@@ -30,12 +31,11 @@ function Pagination({setUpperCounter, setLowerCounter, pokemonNumber}) {
         {
             pages.map((page,i) => {
 
-                if(page <= Math.trunc(pokemonNumber/21)+1){
+                if(page <= Math.trunc(1151/21)+1){
                     return(
                         <button 
                             key = {`page ${i}`}
-                            onClick = {()=> {setUpperCounter((page-1)*21+22); 
-                                                setLowerCounter((page-1)*21+1);
+                            onClick = {()=> {setCounter(page*21 - 21); 
                                                 window.location = "./#top";
                                             }}
                             className=" hover:text-yellow-300 md:{text-sm w-10 h-10} md:mx-4 
@@ -51,7 +51,7 @@ function Pagination({setUpperCounter, setLowerCounter, pokemonNumber}) {
             })
         }
         {
-            (pages.includes(Math.trunc(pokemonNumber/21))) ? 
+            (pages.includes(Math.trunc(1151/21))) ? 
                 <p></p>: 
                 <button onClick={changePageFrw} 
                     className=" hover:text-yellow-300 text-red-500 md:{text-sm w-10 h-10 mx-4} 
