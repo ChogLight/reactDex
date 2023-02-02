@@ -17,7 +17,7 @@ function Card({setCard, pokemon}) {
                         N.°{pokemon.id}
                     </p>
                     <img className = "object-contain h-48 w-48"
-                        src = {pokemon.sprites.front_default}>
+                        src = {pokemon.sprites.other['official-artwork'].front_default}>
                     </img>
                     </div>
                     <div className="w-2/3">

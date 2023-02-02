@@ -19,7 +19,7 @@ function Pagination({setCounter, pokemonNumber}) {
     return (
     <div className="grid md:grid-cols-12 grid-cols-6 md:w-2/3 w-11/12 mx-auto my-5 bg-white text-center p-5 font-bold text-white rounded-full">
         {
-            (pages.includes(1)) ? 
+            pages.includes(1) ? 
             <p></p>: 
                 <button onClick={changePageBkw} 
                     className=" hover:text-yellow-300 text-red-500 md:{text-sm w-10 h-10 mx-4} 

@@ -80,7 +80,7 @@ function App() {
                     height = {pokemon.height}
                     number = {pokemon.id}
                     type = {pokemon.types[1]  ? `${pokemon.types[0].type.name}/${pokemon.types[1].type.name}` : pokemon.types[0].type.name}
-                    img = {pokemon.sprites.front_default}
+                    img = {pokemon.sprites.other['official-artwork'].front_default}
                     pokemon = {pokemon}
                     setCard = {setCard}
                     setPokemon = {setPokemon}
